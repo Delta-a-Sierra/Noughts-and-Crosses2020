@@ -34,11 +34,23 @@
     
     </div>
     <div class="container">
-        <div class="button">New Game</div>
+        <button id="chngname-btn" class="button">Change Name</button>
+        <button id="newgame-btn" class="button">Reset Game</button>
     </div>
     
-   
-    
+    <div class="blur hidden">
+    </div>
+    <div id="chngname-popup" class="popup container center hidden">
+        <div class="form-container">
+            <form class="container center column">
+                <label for="player1NameInput">Player1 Name</label>
+                <input type="text" placeholder="Enter Name" id="p1name" name="p1name" >
+                <label for="player2NameInput">Player2 Name</label>
+                <input type="text" placeholder="Enter Name" id="p2name" name="p2name" >
+                <button id="chngname-confirm-btn" >Confirm Changes</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 <footer>

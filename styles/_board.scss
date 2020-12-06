@@ -1,11 +1,12 @@
 $accent1 : #e29578;
-$accent2 : #006d77;
+$accent2 : #006d7754;
 $neutral1 : #ffddd2;
 
 .board{
     width: 260px;
     height: 90px;
     margin: 0px 40px;
+    
 
     .first, .second{
         width: 100%;
@@ -13,7 +14,7 @@ $neutral1 : #ffddd2;
         color: $neutral1 ;
         padding: 10px 50px;
         font-size: 1.5em;
-        
+        transition: ease-in-out 0.7s;
     }
 }
 

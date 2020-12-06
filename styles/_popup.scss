@@ -1,0 +1,54 @@
+$accent1 : #e29578;
+$accent2 : #006d7754;
+$primaryColor1:#83c5be;
+
+.blur{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup{
+    width: 100vw;
+    height: 80vh;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+}
+
+.form-container{
+    background-color: $primaryColor1;
+    width: 700px;
+    height: 550px;
+    border-radius: 20px;
+}
+
+form{
+    color: white;
+    label{
+        font-size: 2em;
+    }
+    input{
+        margin-bottom: 50px;
+        margin-top: 10px;
+        border-radius: 50px;
+        padding: 15px 30px;
+        font-size: 1.3em;
+        background-color:$accent2;
+        color: white;
+
+        border: 3px solid $accent2 ;
+
+        &:focus{
+            color: white;
+            outline-style: none;
+        }
+    }
+}
+
+
+::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}

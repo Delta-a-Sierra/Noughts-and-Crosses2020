@@ -1,9 +1,12 @@
 
+// Player object Factory
 const player = (sign, newName) => {
     const symbol = sign;
     let name = newName;
+    const player = newName
     let score = 0;
     let isTurn = false
+    const PlayerTXT = document.querySelector(`#${player}`)
     
     const getSymbol = () => {
         return symbol
@@ -44,10 +47,14 @@ const player = (sign, newName) => {
 
     const changeName = (newName) => {
         name = newName;
+        let temp = PlayerTXT.innerHTML.split(':')
+        temp[0] = name
+        temp = temp.join(': ')
+        PlayerTXT.innerHTML = temp
     }
 
     const _togglePlayerColor = () => {
-        const playerPane = document.querySelector(`#${name}`)
+        const playerPane = document.querySelector(`#${player}`)
         if(isTurn){
             playerPane.classList.add('active')
         }
@@ -58,18 +65,25 @@ const player = (sign, newName) => {
     }
 
     const _changeScore = () => {
-        const scoreTxt = document.querySelector(`#${name}`).firstElementChild
-        scoreTxt.innerHTML = score
+        
+        PlayerTXT.firstElementChild.innerHTML = score
     }
 
-    return{ getSymbol, getScore, increaseScore, resetScore, isPlayerTurn, changeTurn, getName, changeName}
+    return{ getSymbol, getScore, increaseScore, resetScore, isPlayerTurn, changeTurn, getName, changeName, player}
 }
 
+// GameBoard Module
 const gameBoard = (() => {
     let _boardState = ["", "", "", "", "", "", "", "", ""];
+    let validTurn = false;
 
-    const changeState = (box, symbol) => {
-        _boardState[box] = symbol;
+    const changeState = (index, symbol, box) => {
+        validTurn = false
+        if(_boardState[index] === ""){
+            box.classList.add(`${symbol}`);
+            _boardState[index] = symbol;
+            validTurn = true
+        }
     }
 
     const getBoardState = () => {
@@ -79,9 +93,13 @@ const gameBoard = (() => {
     const resetBoardState = () => {
         _boardState = _boardState.map(board => board = "");
         boxes.forEach(box => {
-            box.classList.remove('nought');
-            box.classList.remove('cross');
+            box.classList.remove('o');
+            box.classList.remove('x');
         })
+    }
+
+    const isValidTurn = () => {
+        return validTurn;
     }
 
     const findWinner = () => {
@@ -111,8 +129,26 @@ const gameBoard = (() => {
         }
     }
 
-    return {changeState, getBoardState, resetBoardState, findWinner}
+    return {changeState, getBoardState, resetBoardState, findWinner, isValidTurn}
 })();
+
+const popUps = (() => {
+    const chngNamePopUp = document.querySelector('#chngname-popup');
+    const blur = document.querySelector('.blur')
+
+    const showNameChangePopUp = () => {
+        blur.classList.remove('hidden')
+        chngNamePopUp.classList.remove('hidden')
+    }
+
+    const hideNameChangePopUp = () => {
+        blur.classList.add('hidden')
+        chngNamePopUp.classList.add('hidden')
+    }
+
+    return {showNameChangePopUp, hideNameChangePopUp}
+})();
+
 
 const player1 = player('o', "player1");
 player1.changeTurn();
@@ -122,38 +158,69 @@ const boxes = document.querySelectorAll('.box');
 boxes.forEach(box =>{
     box.addEventListener('click', (e) => {
         const boxIndex = Number(box.getAttribute('id'));
-        if(player1.isPlayerTurn()){
-            box.classList.add('nought');
-            gameBoard.changeState(boxIndex, 'o');
+        if(player1.isPlayerTurn()){       
+            gameBoard.changeState(boxIndex, 'o', box);
         }
         else{
-            box.classList.add('cross');
-            gameBoard.changeState(boxIndex, 'x');
+            gameBoard.changeState(boxIndex, 'x', box);
         }
-        const winner = gameBoard.findWinner();
 
-        if(player1.getSymbol() === winner){
-            setTimeout(function() {
-                //alert(`The winner is ${player1.getName()}`)
-                player1.increaseScore()
-                gameBoard.resetBoardState();
-            }, 0)
+        if(gameBoard.isValidTurn()){
+            const winner = gameBoard.findWinner();
+
+            if(player1.getSymbol() === winner){
+                setTimeout(function() {
+                    player1.increaseScore()
+                    gameBoard.resetBoardState();
+                }, 0)
+            }
+            else if (player2.getSymbol() === winner){
+                setTimeout(function() {
+                    player2.increaseScore()
+                    gameBoard.resetBoardState();
+                }, 0)
+            }
             
-        }
-        else if (player2.getSymbol() === winner){
-            setTimeout(function() {
-                //alert(`The winner is ${player2.getName()}`)
-                player2.increaseScore()
+            const boardIsFull = gameBoard.getBoardState().every(box => box != "")
+            if(boardIsFull){
                 gameBoard.resetBoardState();
-            }, 0)
+            }
+            player1.changeTurn();
+            player2.changeTurn();
         }
-        
-        const boardIsFull = gameBoard.getBoardState().every(box => box != "")
-        if(boardIsFull){
-            gameBoard.resetBoardState();
-        }
-
-        player1.changeTurn();
-        player2.changeTurn();
     });
+});
+
+
+const changeNameBtn = document.querySelector('#chngname-btn')
+changeNameBtn.addEventListener('click', () => {
+    popUps.showNameChangePopUp();
+});
+
+const confirmChangeNameBtn = document.querySelector('#chngname-confirm-btn')
+const form = document.querySelector('form')  
+confirmChangeNameBtn.addEventListener('click', (e) => {
+    
+    e.preventDefault()
+    const p1name =  form.p1name.value
+    const p2name = form.p2name.value
+    popUps.hideNameChangePopUp()
+    form.reset()
+    if(p1name != ""){
+        player1.changeName(p1name)
+    }
+    if(p2name != ""){
+        player2.changeName(p2name)
+    }
+});
+
+
+
+const newGameBtn = document.querySelector('#newgame-btn')
+newGameBtn.addEventListener('click', () => {
+    gameBoard.resetBoardState();
+    player2.resetScore();
+    player1.resetScore();
+    player1.changeName(player1.player)
+    player2.changeName(player2.player)
 });

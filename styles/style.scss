@@ -1,5 +1,6 @@
 @import "./board";
 @import "./gameboard";
+@import "./popup";
 
 $primaryColor1:#83c5be ;
 $offwhite:#f3f3f3 ;
@@ -10,6 +11,7 @@ $accent1 : #e29578;
     padding: 0;
     box-sizing: border-box;
     letter-spacing: 5px;
+    font-family: 'Slabo 27px', serif;
 }
 
 body{
@@ -34,13 +36,34 @@ h1{
     align-items: center;
 }
 
-.button{
+.column{
+    flex-direction: column;
+}
+
+button{
+    letter-spacing: 3px;
+    font-size: 1.1em;
     color: $offwhite ;
     display: inline-block;
     margin: auto;
-    padding: 15px 25px;
+    padding: 20px 35px;
     background-color: $accent1;
     border-radius: 50px;
-    font-size: 1.5em;
+    border: none;
+    transition: ease-in-out 0.3s;
+    box-shadow: none;
+    
+
+    &:focus{
+        outline-style: none;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+        box-shadow: rgba(0, 0, 0, 0.384) 1px 1px 3px 1px ;
+    }
 }
 
+.hidden{
+    display: none;
+}
