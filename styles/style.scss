@@ -1,0 +1,46 @@
+@import "./board";
+@import "./gameboard";
+
+$primaryColor1:#83c5be ;
+$offwhite:#f3f3f3 ;
+$accent1 : #e29578;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 5px;
+}
+
+body{
+    background-color: $primaryColor1;
+}
+
+h1{
+    margin-top: 50px;
+    text-align: center;
+    color: $offwhite;
+    font-size: 3.5em ;
+    font-family: 'Slabo 27px', serif;
+}
+
+.container{
+    margin-top: 100px;
+    display: flex;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    color: $offwhite ;
+    display: inline-block;
+    margin: auto;
+    padding: 15px 25px;
+    background-color: $accent1;
+    border-radius: 20px;
+    font-size: 1.5em;
+}
+

@@ -1,0 +1,31 @@
+$offwhite: #f3f3f3;
+$accent2: #006d77;
+
+.game-board{
+    width: 600px;
+    height: 600px;
+    background-color: wheat;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box{
+    //flex-basis: 33%;
+    min-width: 200px;
+    min-height: 200px;
+    border: 3px solid $accent2;
+    background-color: $offwhite;
+    font-size: 3em;
+}
+
+.nought{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../images/nought.png);
+}
+
+.cross{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../images/cross.png);
+}

@@ -1,0 +1,101 @@
+.board {
+  width: 260px;
+  height: 90px;
+  margin: 0px 40px;
+}
+
+.board .first, .board .second {
+  width: 100%;
+  height: 50%;
+  color: #ffddd2;
+  padding: 10px 50px;
+  font-size: 1.5em;
+}
+
+.first {
+  border-radius: 20px 20px 0 0;
+  background-color: #e29578;
+}
+
+.second {
+  border-radius: 0 0 20px 20px;
+  background-color: #006d77;
+}
+
+.game-board {
+  width: 600px;
+  height: 600px;
+  background-color: wheat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.box {
+  min-width: 200px;
+  min-height: 200px;
+  border: 3px solid #006d77;
+  background-color: #f3f3f3;
+  font-size: 3em;
+}
+
+.nought {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/nought.png);
+}
+
+.cross {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/cross.png);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  letter-spacing: 5px;
+}
+
+body {
+  background-color: #83c5be;
+}
+
+h1 {
+  margin-top: 50px;
+  text-align: center;
+  color: #f3f3f3;
+  font-size: 3.5em;
+  font-family: 'Slabo 27px', serif;
+}
+
+.container {
+  margin-top: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.button {
+  color: #f3f3f3;
+  display: inline-block;
+  margin: auto;
+  padding: 15px 25px;
+  background-color: #e29578;
+  border-radius: 20px;
+  font-size: 1.5em;
+}
+/*# sourceMappingURL=style.css.map */
